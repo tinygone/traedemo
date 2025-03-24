@@ -5,15 +5,22 @@ const saveBtn = document.getElementById('save-btn');
 const preview = document.getElementById('preview');
 const errorMessage = document.getElementById('error-message');
 
+// 创建AI总结按钮
+const summarizeBtn = document.createElement('button');
+summarizeBtn.id = 'summarize-btn';
+summarizeBtn.textContent = 'DeepSeek R1总结';
+document.querySelector('.button-group').appendChild(summarizeBtn);
+
 // 生成图片的配置参数
 const config = {
   width: 600, // 图片宽度
-  padding: 40, // 内边距
-  lineHeight: 1.5, // 行高
-  fontSize: 24, // 字体大小
-  fontFamily: '"Microsoft YaHei", sans-serif', // 字体
-  textColor: '#000000', // 文字颜色
-  backgroundColor: '#ffffff' // 背景颜色
+  padding: 50, // 内边距
+  lineHeight: 1.8, // 行高
+  fontSize: 28, // 字体大小
+  fontFamily: '"Source Han Sans CN", "Noto Sans SC", "Microsoft YaHei", sans-serif', // 字体
+  textColor: '#2c3e50', // 文字颜色
+  backgroundColor: '#ffffff', // 背景颜色
+  textShadow: '2px 2px 4px rgba(0, 0, 0, 0.1)' // 文字阴影
 };
 
 // 监听生成按钮点击事件
@@ -75,6 +82,10 @@ function generateImage(text) {
   ctx.fillStyle = config.textColor;
   ctx.font = `${config.fontSize}px ${config.fontFamily}`;
   ctx.textAlign = 'center';
+  ctx.shadowColor = 'rgba(0, 0, 0, 0.1)';
+  ctx.shadowBlur = 4;
+  ctx.shadowOffsetX = 2;
+  ctx.shadowOffsetY = 2;
   
   lines.forEach((line, index) => {
     const y = config.padding + (index * lineHeight) + config.fontSize;
@@ -115,5 +126,45 @@ function getLines(ctx, text, maxWidth) {
 textInput.addEventListener('input', () => {
   if (textInput.value.trim()) {
     errorMessage.style.display = 'none';
+  }
+});
+
+// 监听AI总结按钮点击事件
+summarizeBtn.addEventListener('click', async () => {
+  const text = textInput.value.trim();
+  
+  // 验证输入
+  if (!text) {
+    errorMessage.style.display = 'block';
+    return;
+  }
+  
+  errorMessage.style.display = 'none';
+  summarizeBtn.disabled = true;
+  summarizeBtn.textContent = '正在总结...';
+  
+  try {
+    const response = await fetch('http://localhost:3000/api/summarize', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({ text })
+    });
+    
+    if (!response.ok) {
+      throw new Error('API请求失败');
+    }
+    
+    const data = await response.json();
+    textInput.value = data.summary;
+    
+  } catch (error) {
+    console.error('总结失败:', error);
+    errorMessage.textContent = '总结失败，请重试';
+    errorMessage.style.display = 'block';
+  } finally {
+    summarizeBtn.disabled = false;
+    summarizeBtn.textContent = 'DeepSeek R1总结';
   }
 });
