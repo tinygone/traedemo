@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Life Coach - 你的个人成长伙伴</title>
+    <link rel="stylesheet" href="public/css/style.css">
+</head>
+<body>
+    <!-- 顶部导航栏 -->
+    <header class="header">
+        <h1>AI Life Coach</h1>
+        <button id="themeToggle" class="theme-toggle">
+            <span class="light-mode">🌞</span>
+            <span class="dark-mode">🌙</span>
+        </button>
+    </header>
+
+    <!-- 聊天主区域 -->
+    <main class="chat-container">
+        <div id="messageHistory" class="message-history">
+            <!-- 欢迎消息 -->
+            <div class="message assistant">
+                <div class="message-content">
+                    你好！我是你的 AI Life Coach。我很高兴能成为你个人成长的伙伴。
+                    让我们开始探讨你的目标、挑战和梦想吧！
+                </div>
+            </div>
+        </div>
+
+        <!-- 底部输入区 -->
+        <div class="input-container">
+            <textarea
+                id="userInput"
+                class="message-input"
+                placeholder="输入你的问题或想法..."
+                rows="1"
+            ></textarea>
+            <button id="sendButton" class="send-button">
+                <span class="send-icon">📤</span>
+                <span class="loading-icon">🔄</span>
+            </button>
+        </div>
+    </main>
+
+    <script src="public/js/app.js"></script>
+</body>
+</html>
