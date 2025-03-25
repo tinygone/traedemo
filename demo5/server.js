@@ -1,6 +1,6 @@
 const express = require('express');
 const cors = require('cors');
-const https = require('https');
+const http = require('http');
 
 const app = express();
 app.use(cors());
@@ -30,19 +30,11 @@ app.post('/api/summarize', async (req, res) => {
         headers: {
           'Content-Type': 'application/json'
         },
-        rejectUnauthorized: false,
-        timeout: TIMEOUT,
-        rejectUnauthorized: false,
-        timeout: TIMEOUT,
-        agent: new https.Agent({
-          rejectUnauthorized: false,
-          keepAlive: true,
-          secureOptions: require('constants').SSL_OP_NO_TLSv1_2 | require('constants').SSL_OP_NO_TLSv1_3
-        })
+        timeout: TIMEOUT
       };
 
       return new Promise((resolve, reject) => {
-        const apiRequest = https.request(options, (apiRes) => {
+        const apiRequest = http.request(options, (apiRes) => {
       let data = '';
       
       apiRes.on('data', (chunk) => {
@@ -84,7 +76,7 @@ app.post('/api/summarize', async (req, res) => {
       ],
       temperature: 0.6,
       max_tokens: -1,
-      stream: true
+      stream: false
     };
 
     apiRequest.write(JSON.stringify(requestData));
