@@ -1,0 +1,160 @@
+/* 主题样式文件 */
+
+/* 暗色主题变量 */
+.theme-dark {
+    --primary-color: #4a6baf;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --info-color: #17a2b8;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+    --glass-bg: rgba(0, 0, 0, 0.2);
+    --glass-border: rgba(255, 255, 255, 0.1);
+    --glass-shadow: rgba(0, 0, 0, 0.3);
+    --text-color: #ffffff;
+    --text-secondary: rgba(255, 255, 255, 0.7);
+    --bg-gradient: linear-gradient(135deg, #2c3e50, #4a6baf);
+}
+
+/* 亮色主题变量 */
+.theme-light {
+    --primary-color: #4a6baf;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --info-color: #17a2b8;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+    --glass-bg: rgba(255, 255, 255, 0.25);
+    --glass-border: rgba(255, 255, 255, 0.3);
+    --glass-shadow: rgba(0, 0, 0, 0.1);
+    --text-color: #333333;
+    --text-secondary: rgba(0, 0, 0, 0.7);
+    --bg-gradient: linear-gradient(135deg, #a1c4fd, #c2e9fb);
+}
+
+/* 默认使用亮色主题 */
+:root {
+    --primary-color: #4a6baf;
+    --secondary-color: #6c757d;
+    --success-color: #28a745;
+    --info-color: #17a2b8;
+    --warning-color: #ffc107;
+    --danger-color: #dc3545;
+    --light-color: #f8f9fa;
+    --dark-color: #343a40;
+    --glass-bg: rgba(255, 255, 255, 0.15);
+    --glass-border: rgba(255, 255, 255, 0.2);
+    --glass-shadow: rgba(0, 0, 0, 0.1);
+    --text-color: #333333;
+    --text-secondary: rgba(0, 0, 0, 0.7);
+    --bg-gradient: linear-gradient(135deg, #6e8efb, #a777e3);
+}
+
+/* 主题切换按钮样式 */
+.theme-toggle {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    background: var(--glass-bg);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid var(--glass-border);
+    border-radius: 50%;
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 1000;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 12px var(--glass-shadow);
+}
+
+.theme-toggle:hover {
+    transform: scale(1.1);
+}
+
+/* 主题特定样式覆盖 */
+.theme-dark body {
+    background: var(--bg-gradient);
+    color: var(--text-color);
+}
+
+.theme-light body {
+    background: var(--bg-gradient);
+    color: var(--text-color);
+}
+
+/* 主题特定卡片样式 */
+.theme-dark .glass-card {
+    background: var(--glass-bg);
+    border-color: var(--glass-border);
+    color: var(--text-color);
+}
+
+.theme-light .glass-card {
+    background: var(--glass-bg);
+    border-color: var(--glass-border);
+    color: var(--text-color);
+}
+
+/* 主题特定表单元素样式 */
+.theme-dark .form-control {
+    background: rgba(0, 0, 0, 0.2);
+    border-color: var(--glass-border);
+    color: var(--text-color);
+}
+
+.theme-light .form-control {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: var(--glass-border);
+    color: var(--text-color);
+}
+
+/* 主题特定按钮样式 */
+.theme-dark .btn-outline {
+    border: 1px solid var(--glass-border);
+    background: transparent;
+    color: var(--text-color);
+}
+
+.theme-light .btn-outline {
+    border: 1px solid var(--glass-border);
+    background: transparent;
+    color: var(--text-color);
+}
+
+/* 动画效果 */
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+@keyframes slideUp {
+    from { transform: translateY(20px); opacity: 0; }
+    to { transform: translateY(0); opacity: 1; }
+}
+
+/* 应用动画 */
+.fade-in {
+    animation: fadeIn 0.5s ease forwards;
+}
+
+.slide-up {
+    animation: slideUp 0.5s ease forwards;
+}
+
+/* 响应式主题调整 */
+@media (max-width: 768px) {
+    .theme-toggle {
+        top: 10px;
+        right: 10px;
+        width: 35px;
+        height: 35px;
+    }
+}
